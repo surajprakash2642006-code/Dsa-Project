@@ -1,0 +1,139 @@
+/* It's good practice to import fonts at the top */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  background: black;
+  margin: 0;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: column; /* Center everything vertically */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-container {
+  text-align: center;
+}
+
+.hud {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: space-around;
+  color: #ffd700;
+  text-shadow: 2px 2px #000;
+  width: 560px; /* Match board width */
+}
+
+/* Find the .board rule in your CSS file */
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(28, 20px);
+  grid-template-rows: repeat(22, 20px); /* Change 31 to 22 */
+  width: calc(28 * 20px);
+  height: calc(22 * 20px); /* Change 31 to 22 */
+  border: 2px solid navy;
+  background-color: black;
+}
+
+.cell {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.wall {
+  background: navy;
+}
+
+.dot::after {
+  content: '';
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 8px;
+}
+
+.pellet::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 5px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.7); }
+  100% { transform: scale(1); }
+}
+
+.pacman, .ghost {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 10;
+}
+
+.pacman {
+  background: yellow;
+  border-radius: 50%;
+  transition: transform 0.1s linear;
+  clip-path: polygon(0 25%, 50% 50%, 0 75%, 0 50%, 100% 0, 100% 100%, 0 50%);
+  animation: chomp 0.4s infinite;
+}
+
+@keyframes chomp {
+  0% { clip-path: polygon(0 25%, 50% 50%, 0 75%, 0 50%, 100% 0, 100% 100%, 0 50%); }
+  50% { clip-path: polygon(0 48%, 50% 50%, 0 52%, 0 50%, 100% 50%, 100% 50%, 0 50%); }
+  100% { clip-path: polygon(0 25%, 50% 50%, 0 75%, 0 50%, 100% 0, 100% 100%, 0 50%); }
+}
+
+.pacman-right { transform: rotate(0deg); }
+.pacman-left { transform: rotate(180deg); }
+.pacman-up { transform: rotate(-90deg); }
+.pacman-down { transform: rotate(90deg); }
+
+.ghost {
+  /* background: red; -- We remove the generic color from here */
+  border-radius: 10px 10px 0 0;
+  transition: all 0.3s linear;
+}
+
+/* Add these new rules for each ghost's color */
+.ghost-blinky {
+  background-color: red;
+}
+
+.ghost-pinky {
+  background-color: #ffb8de; /* Pink */
+}
+
+.ghost-inky {
+  background-color: #00ffff; /* Cyan */
+}
+/* Add this at the end of the file */
+.hud button {
+  background-color: #222;
+  color: #ffd700;
+  border: 2px solid navy;
+  font-family: 'Press Start 2P', cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.hud button:hover {
+  background-color: navy;
+  color: white;
+}
